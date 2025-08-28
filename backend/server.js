@@ -37,7 +37,7 @@ const allowedOrigins = [
     'https://tomato-app-admin-laf1.onrender.com'    
 ];
 
-app.use(cors({ origin: allowedOrigins }));
+app.use(cors({ origin: 'http://localhost:5173', 'https://tomato-app-frontend-b6oa.onrender.com', 'https://tomato-app-admin-laf1.onrender.com'}));
 
 
 // --- Database Connection ---
