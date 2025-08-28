@@ -29,7 +29,7 @@ const port = process.env.PORT || 4000;
 // This allows the server to parse JSON data in request bodies
 app.use(express.json());
 // This enables Cross-Origin Resource Sharing, allowing your frontend to communicate with this backend
-app.use(cors());
+app.use(cors({origin:'https://tomato-app-frontend-b6oa.onrender.com','https://tomato-app-admin-laf1.onrender.com'}));
 
 
 // --- Database Connection ---
