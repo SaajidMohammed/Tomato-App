@@ -30,7 +30,9 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 // This enables Cross-Origin Resource Sharing, allowing your frontend to communicate with this backend
 
-app.use(cors({ origin: 'http://localhost:5173', 'https://tomato-app-frontend-b6oa.onrender.com', 'https://tomato-app-admin-laf1.onrender.com'}));
+app.use(cors({ origin: [
+    'http://localhost:5173', 'https://tomato-app-frontend-b6oa.onrender.com', 'https://tomato-app-admin-laf1.onrender.com'
+]}));
 
 
 // --- Database Connection ---
