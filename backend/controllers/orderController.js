@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Placing user order
 const placeOrder = async (req, res) => {
-    const frontend_url = "http://localhost:5173";
+    const frontend_url = "https://tomato-app-frontend-b6oa.onrender.com";
 
     try {
         const newOrder = new orderModel({
@@ -39,8 +39,8 @@ const placeOrder = async (req, res) => {
         const session = await stripe.checkout.sessions.create({
             line_items: line_items,
             mode: "payment",
-            success_url: `${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
-            cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`,
+            success_url: `${frontend_url}/myorders`,
+            cancel_url: `${frontend_url}`,
         });
 
         res.json({ success: true, session_url: session.url });
