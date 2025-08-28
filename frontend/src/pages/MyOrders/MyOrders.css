@@ -1,0 +1,248 @@
+.my-orders {
+  padding: 32px 0 0 40px;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+
+.my-orders h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 32px;
+  padding-left: 8px;
+}
+
+.my-orders .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.my-orders-order {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d3cfcf;
+  border-radius: 4px;
+  background: #fff;
+  padding: 16px 28px 16px 16px;
+  margin: 0 auto;
+  gap: 24px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.my-orders-order img {
+  width: 40px;
+  height: 40px;
+  margin-right: 18px;
+}
+
+.my-orders-order p {
+  margin: 0 18px 0 0;
+  font-size: 15px;
+  color: #222;
+  white-space: nowrap;
+}
+
+.my-orders-order p:first-of-type {
+  flex: 2 1 auto;
+  white-space: normal;
+  word-break: break-word;
+  margin-left: 0;
+}
+
+.my-orders-order p:nth-of-type(2) {
+  min-width: 90px;
+  font-weight: 600;
+  color: #221f1f;
+  text-align: right;
+}
+
+.my-orders-order p:nth-of-type(3) {
+  min-width: 85px;
+  text-align: right;
+  color: #444;
+}
+
+.my-orders-order p:nth-of-type(4) {
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.my-orders-order p span {
+  font-size: 16px;
+  color: #EF5350; /* dot color */
+  margin-right: 4px;
+}
+
+.my-orders-order button {
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #bdbdbd;
+  color: #111;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 6px 22px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: border 0.2s, background 0.2s;
+}
+
+.my-orders-order button:hover {
+  border: 1.5px solid #007bff;
+  background: #f8faff;
+}
+
+/* Responsive styles */
+
+@media (max-width: 768px) {
+  .my-orders {
+    padding: 20px 16px;
+  }
+
+  .my-orders-order {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .my-orders-order img {
+    margin-right: 12px;
+  }
+
+  .my-orders-order p {
+    margin: 4px 8px 4px 0;
+    white-space: normal;
+  }
+
+  .my-orders-order p:nth-of-type(2),
+  .my-orders-order p:nth-of-type(3),
+  .my-orders-order p:nth-of-type(4) {
+    min-width: auto;
+    flex-basis: 100%;
+    text-align: left;
+  }
+
+  .my-orders-order button {
+    width: 100%;
+    margin-left: 0;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .my-orders h2 {
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+  }
+
+  .my-orders-order {
+    width: 100%;
+    padding: 12px 12px;
+    gap: 8px;
+  }
+
+  .my-orders-order button {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .my-orders {
+    padding: 28px 24px 0 24px;
+  }
+
+  .my-orders-order {
+    gap: 16px;
+    padding: 14px 20px 14px 14px;
+    font-size: 14px;
+  }
+
+  .my-orders-order img {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+  }
+
+  .my-orders-order p {
+    margin: 0 14px 0 0;
+    white-space: nowrap;
+  }
+
+  .my-orders-order p:first-of-type {
+    flex: 1.5 1 auto;
+    white-space: normal;
+  }
+
+  .my-orders-order p:nth-of-type(2),
+  .my-orders-order p:nth-of-type(3),
+  .my-orders-order p:nth-of-type(4) {
+    min-width: 70px;
+    text-align: right;
+    font-size: 14px;
+  }
+
+  .my-orders-order button {
+    padding: 6px 18px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 798px) {
+  .my-orders {
+    padding: 18px 8px 0 8px;
+  }
+
+  .my-orders-order {
+    flex-wrap: wrap;
+    gap: 10px 0;
+    padding: 14px 10px;
+    align-items: flex-start;
+    font-size: 14px;
+  }
+
+  .my-orders-order img {
+    width: 32px;
+    height: 32px;
+    margin: 0 14px 5px 0;
+  }
+
+  .my-orders-order p {
+    margin: 3px 10px 0 0;
+    font-size: 14px;
+    min-width: unset;
+    white-space: normal;
+    flex-basis: 100%;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  .my-orders-order p:first-of-type {
+    order: 1;
+  }
+  .my-orders-order p:nth-of-type(2),
+  .my-orders-order p:nth-of-type(3),
+  .my-orders-order p:nth-of-type(4) {
+    order: 2; /* Group these together, or adjust as needed */
+    flex-basis: 40%;
+    text-align: left;
+    margin-bottom: 6px;
+  }
+
+  .my-orders-order button {
+    order: 3;
+    width: 100%;
+    margin: 8px 0 0 0;
+    padding: 8px 0;
+    font-size: 14px;
+    align-self: flex-end;
+  }
+}
+
