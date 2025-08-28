@@ -31,9 +31,10 @@ app.use(express.json());
 // This enables Cross-Origin Resource Sharing, allowing your frontend to communicate with this backend
 
 const allowedOrigins = [
-    'http://localhost:5173', // Your local frontend URL
-    'https://tomato-app-frontend-b6oa.onrender.com', // Replace with your actual live frontend URL
-    'https://tomato-app-admin-laf1.onrender.com'    // Replace with your actual live admin URL
+    'http://localhost:5173', 
+    'http://localhost:5174'
+    'https://tomato-app-frontend-b6oa.onrender.com',
+    'https://tomato-app-admin-laf1.onrender.com'    
 ];
 
 app.use(cors({ origin: allowedOrigins }));
