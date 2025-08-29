@@ -16,7 +16,6 @@ const Orders = ({ url }) => {
                 toast.error('Error fetching orders');
             }
         } catch (error) {
-            // This will show the exact error in your browser console
             console.error("Failed to fetch orders:", error);
             toast.error('A critical error occurred while fetching orders.');
         }
@@ -45,8 +44,8 @@ const Orders = ({ url }) => {
         <div className='order add'>
             <h3>Order Page</h3>
             <div className="order-list">
-                {orders.map((order, index) => (
-                    <div key={index} className='order-item'>
+                {orders.map((order) => (
+                    <div key={order._id} className='order-item'>
                         <img src={assets.parcel_icon} alt="" />
                         <div>
                             <p className='order-item-food'>
@@ -80,4 +79,4 @@ const Orders = ({ url }) => {
     )
 }
 
-export default Orders
+export default Orders;
