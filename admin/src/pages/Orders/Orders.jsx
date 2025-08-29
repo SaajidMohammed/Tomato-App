@@ -8,13 +8,25 @@ const Orders = ({ url }) => {
   const [orders, setOrders] = useState([]);
   const [totalRevenue, setTotalRevenue] = useState(0);
 
+  // --- HELPER FUNCTION TO GET HEADERS WITH TOKEN ---
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Authentication token not found. Please log in again.");
+      return null;
+    }
+    return { headers: { Authorization: `Bearer ${token}` } };
+  };
+
   useEffect(() => {
     const fetchRevenue = async () => {
+      const authHeaders = getAuthHeaders();
+      if (!authHeaders) return;
+
       try {
-        const response = await axios.get(url + "/api/order/list");
+        const response = await axios.get(url + "/api/order/list", authHeaders);
         if (response.data.success) {
           const orders = response.data.data;
-          // Sum all orders' amounts (delivered + upcoming)
           const revenue = orders.reduce(
             (sum, order) => sum + Number(order.amount),
             0
@@ -24,7 +36,8 @@ const Orders = ({ url }) => {
           setTotalRevenue(0);
         }
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        console.error("Error fetching orders for revenue:", error);
+        toast.error(error.response?.data?.message || "Error fetching revenue.");
         setTotalRevenue(0);
       }
     };
@@ -32,51 +45,63 @@ const Orders = ({ url }) => {
     fetchRevenue();
   }, [url]);
 
-  // Fetch all orders from API
   const fetchAllOrders = async () => {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders) return;
+
     try {
-      const response = await axios.get(url + "/api/order/list");
+      const response = await axios.get(url + "/api/order/list", authHeaders);
       if (response.data.success) {
         setOrders(response.data.data);
-        console.log(response.data.data);
       } else {
         toast.error("Error fetching orders");
       }
     } catch (error) {
-      toast.error("Error fetching orders");
+      toast.error(error.response?.data?.message || "Error fetching orders");
       console.error("Fetch orders error:", error);
     }
   };
 
-  // Update order status and refresh orders list
   const statusHandler = async (event, orderId) => {
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders) return;
+
     try {
-      const response = await axios.post(url + "/api/order/status", {
-        orderId,
-        status: event.target.value,
-      });
+      const response = await axios.post(
+        url + "/api/order/status",
+        {
+          orderId,
+          status: event.target.value,
+        },
+        authHeaders
+      );
       if (response.data.success) {
-        await fetchAllOrders(); // Refresh UI instantly
+        await fetchAllOrders();
         toast.success("Order status updated");
       } else {
         toast.error("Failed to update order status");
       }
     } catch (error) {
       console.error("Error updating order status:", error);
-      toast.error("Error updating order status");
+      toast.error(error.response?.data?.message || "Error updating order status");
     }
   };
 
-  // Delete order if status is Delivered
   const deleteOrder = async (orderId, orderStatus) => {
     if (orderStatus !== "Delivered") {
       toast.error("Only delivered orders can be deleted");
       return;
     }
+    
+    const authHeaders = getAuthHeaders();
+    if (!authHeaders) return;
+
     try {
-      const response = await axios.delete(url + `/api/order/delete/${orderId}`);
+      const response = await axios.delete(
+        url + `/api/order/delete/${orderId}`,
+        authHeaders
+      );
       if (response.data.success) {
-        // Remove the order from local state immediately
         setOrders((prevOrders) =>
           prevOrders.filter((order) => order._id !== orderId)
         );
@@ -86,7 +111,7 @@ const Orders = ({ url }) => {
       }
     } catch (error) {
       console.error("Error deleting order:", error);
-      toast.error("Error deleting order");
+      toast.error(error.response?.data?.message || "Error deleting order");
     }
   };
 
@@ -106,8 +131,8 @@ const Orders = ({ url }) => {
         </p>
       </div>
       <div className="order-list">
-        {orders.map((order, index) => (
-          <div key={index} className="order-item">
+        {orders.map((order) => (
+          <div key={order._id} className="order-item">
             <img src={assets.parcel_icon} alt="Parcel Icon" />
             <div>
               <p className="order-item-food">
